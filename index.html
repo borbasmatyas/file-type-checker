@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fájl típus ellenőrzés</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h2 {
+            margin-top: 20px;
+            color: #444;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        p {
+            font-style: italic;
+            color: #555;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .file-upload {
+            margin-bottom: 20px;
+        }
+        .file-upload label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="file-upload">
+            <h2>Bármilyen fájl</h2>
+            <input type="file" id="anyUpload">
+            <p id="anyResult"></p>
+        </div>
+
+        <div class="file-upload">
+            <h2>Csak image/*,image/heic,.heic</h2>
+            <input type="file" id="jpgHeicUpload" accept="image/*,image/heic,.heic">
+            <p id="jpgHeicResult"></p>
+        </div>
+
+        <div class="file-upload">
+            <h2>Csak image/jpeg</h2>
+            <input type="file" id="jpgOnlyUpload" accept="image/jpeg">
+            <p id="jpgOnlyResult"></p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener("change", event => {
+                const file = event.target.files[0];
+                const resultElement = document.getElementById(input.id + "Result");
+                resultElement.textContent = file ? `A fájl típusa: ${file.type}` : "Nincs fájl kiválasztva.";
+            });
+        });
+    </script>
+</body>
+</html>
